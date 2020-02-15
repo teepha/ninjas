@@ -13,9 +13,7 @@ router.get("/ninjas/:id", (req, res) => {
   res.send({ message: "Retrieve a Ninja here!" });
 });
 
-router.put("/ninjas/:id", (req, res) => {
-  res.send({ message: "Update Ninja details here!" });
-});
+router.put("/ninjas/:id", NinjaController.update);
 
 router.delete("/ninjas/:id", NinjaController.delete);
 
