@@ -41,6 +41,47 @@ class NinjaController {
       next(error);
     }
   }
+
+  static async getAll(req, res, next) {
+    try {
+      const { lng, lat } = req.query;
+      const point = {
+        type: "Point",
+        coordinates: [parseFloat(lng), parseFloat(lat)]
+      };
+      const ninjas = await Ninja.aggregate([
+        {
+          $geoNear: {
+            near: point,
+            distanceField: "distance",
+            maxDistance: 100000,
+            spherical: true
+          }
+        }
+      ]);
+      res.json(ninjas);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getOne(req, res, next) {
+    try {
+      const ninja = await Ninja.findById(req.params.id);
+      res.json(ninja);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAvailable(req, res, next) {
+    try {
+      const ninjas = await Ninja.find({ available: true });
+      res.json(ninjas);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default NinjaController;

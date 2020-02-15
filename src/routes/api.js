@@ -3,15 +3,13 @@ import NinjaController from "../controllers/ninja.controller";
 
 const router = Router();
 
-router.get("/ninjas", (req, res) => {
-  res.send({ message: "Return Ninjas here!" });
-});
+router.get("/ninjas", NinjaController.getAll);
 
 router.post("/ninjas", NinjaController.create);
 
-router.get("/ninjas/:id", (req, res) => {
-  res.send({ message: "Retrieve a Ninja here!" });
-});
+router.get("/ninjas/available", NinjaController.getAvailable);
+
+router.get("/ninjas/:id", NinjaController.getOne);
 
 router.put("/ninjas/:id", NinjaController.update);
 
