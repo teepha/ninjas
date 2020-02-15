@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import GeoSchema from "./geolocation.schema";
 
 const Schema = mongoose.Schema;
 
@@ -13,8 +14,8 @@ const NinjaSchema = new Schema({
   available: {
     type: Boolean,
     default: false
-  }
-  // add geo location
+  },
+  geometry: GeoSchema
 });
 
 export default NinjaSchema;
